@@ -76,9 +76,13 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <ul>
-        {persons.map((person) => (
+        { filteredResults.length > 0 ? filteredResults.map((person) => (
+          <Number key={person.name} person={person} />
+          ))
+        : persons.map((person) => (
           <Number key={person.name} person={person} />
         ))}
+      
       </ul>
     </div>
   );
