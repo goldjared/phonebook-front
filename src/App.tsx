@@ -1,20 +1,20 @@
 import { useState } from 'react';
 import { Number } from './components/Number';
 
-interface FilteredProperties {
+interface PersonEntry {
   name: string;
   number: string;
   id: number;
 }
 
 const App = () => {
-  const [persons, setPersons] = useState([
+  const [persons, setPersons] = useState<PersonEntry[]>([
     { name: 'Arto Hellas', number: '040-123456', id: 1 },
     { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
     { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
     { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ])  
-  const [filteredResults, setFilteredResults] = useState<FilteredProperties[]>([]);
+  const [filteredResults, setFilteredResults] = useState<PersonEntry[]>([]);
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [newSearch, setNewSearch] = useState('');
@@ -22,7 +22,7 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault();
     console.log('button clicked', event.target);
-    const phoneObj = {
+    const phoneObj: PersonEntry = {
       name: newName,
       number: newNumber,
       id: 123,
