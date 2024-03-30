@@ -36,6 +36,8 @@ const App = () => {
 
     setNewName('');
     setNewNumber('');
+    setNewSearch('');
+    setFilteredResults([]);
   };
 
   const handleNameChange = (event) => {
@@ -49,11 +51,17 @@ const App = () => {
   };
 
   const searchItems = (searchValue) => {
+    console.log(searchValue)
     setNewSearch(searchValue)
    const filteredData = persons.filter((item) => {
       return Object.values(item).join('').toLowerCase().includes(newSearch.toLowerCase())
     }) 
-    setFilteredResults(filteredData);
+    console.log(filteredData.length);
+    console.log(filteredData);
+    searchValue === "" 
+      ? setFilteredResults([])
+      : setFilteredResults(filteredData);
+    
   }
   return (
     <div>
