@@ -51,13 +51,11 @@ const App = () => {
   };
 
   const searchItems = (searchValue) => {
-    console.log(searchValue)
     setNewSearch(searchValue)
-   const filteredData = persons.filter((item) => {
+      const filteredData = persons.filter((item) => {
       return Object.values(item).join('').toLowerCase().includes(newSearch.toLowerCase())
     }) 
-    console.log(filteredData.length);
-    console.log(filteredData);
+    // resets filtered to empty if the search input is cleared
     searchValue === "" 
       ? setFilteredResults([])
       : setFilteredResults(filteredData);
