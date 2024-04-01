@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { Number } from './components/Number';
 import { Search } from './components/Search';
-
-interface PersonEntry {
-  name: string;
-  number: string;
-  id: number;
-}
+import { AddForm } from './components/AddForm';
+import type { PersonEntry } from './types/phonebookTypes';
 
 const App = () => {
   const [persons, setPersons] = useState<PersonEntry[]>([
@@ -16,43 +12,6 @@ const App = () => {
     { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 },
   ]);
   const [filteredResults, setFilteredResults] = useState<PersonEntry[]>([]);
-  const [newName, setNewName] = useState('');
-  const [newNumber, setNewNumber] = useState('');
-
-  const addPerson = (event) => {
-    event.preventDefault();
-    console.log('button clicked', event.target);
-    const phoneObj: PersonEntry = {
-      name: newName,
-      number: newNumber,
-      id: 123,
-    };
-
-    if (
-      persons.some(
-        (person) => person.name.toLowerCase() === newName.toLowerCase()
-      )
-    ) {
-      alert(`${newName} is already added to the phonebook`);
-    } else {
-      setPersons(persons.concat(phoneObj));
-    }
-
-    setNewName('');
-    setNewNumber('');
-    // setNewSearch('');
-    // setFilteredResults([]);
-  };
-
-  const handleNameChange = (event) => {
-    console.log(event.target.value);
-    setNewName(event.target.value);
-  };
-
-  const handleNumberChange = (event) => {
-    console.log(event.target.value);
-    setNewNumber(event.target.value);
-  };
 
   return (
     <div>
@@ -61,19 +20,7 @@ const App = () => {
         persons={persons}
         setFilteredResults={setFilteredResults}
       ></Search>
-      <div>debug: {newName}</div>
-      <h2>Add a New</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange} />
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type='submit'>add</button>
-        </div>
-      </form>
+      <AddForm persons={persons} setPersons={setPersons}></AddForm>
       <h2>Numbers</h2>
       <ul>
         {filteredResults.length > 0
