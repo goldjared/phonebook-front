@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Number } from './components/Number';
 import { Search } from './components/Search';
 import { AddForm } from './components/AddForm';
+import { PersonDisplay } from './components/PersonDisplay';
 import type { PersonEntry } from './types/phonebookTypes';
 
 const App = () => {
@@ -21,16 +21,10 @@ const App = () => {
         setFilteredResults={setFilteredResults}
       ></Search>
       <AddForm persons={persons} setPersons={setPersons}></AddForm>
-      <h2>Numbers</h2>
-      <ul>
-        {filteredResults.length > 0
-          ? filteredResults.map((person) => (
-              <Number key={person.name} person={person} />
-            ))
-          : persons.map((person) => (
-              <Number key={person.name} person={person} />
-            ))}
-      </ul>
+      <PersonDisplay
+        filteredResults={filteredResults}
+        persons={persons}
+      ></PersonDisplay>
     </div>
   );
 };
