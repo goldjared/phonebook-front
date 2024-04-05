@@ -1,9 +1,10 @@
+import axios from 'axios';
 import type { PersonEntry } from '../types/phonebookTypes';
 import { useState } from 'react';
 
 const AddForm = ({ persons, setPersons }) => {
   const [newName, setNewName] = useState('');
-  const [newNumber, setNewNumber] = useState('');
+  const [newId, setNewId] = useState('');
 
   const handleNameChange = (event) => {
     console.log(event.target.value);
@@ -12,7 +13,7 @@ const AddForm = ({ persons, setPersons }) => {
 
   const handleNumberChange = (event) => {
     console.log(event.target.value);
-    setNewNumber(event.target.value);
+    setNewId(event.target.value);
   };
 
   const addPerson = (event) => {
@@ -20,8 +21,7 @@ const AddForm = ({ persons, setPersons }) => {
     console.log('button clicked', event.target);
     const phoneObj: PersonEntry = {
       name: newName,
-      number: newNumber,
-      id: 123,
+      id: newId,
     };
     let personExists: boolean = persons.some(
       (person) => person.name.toLowerCase() === newName.toLowerCase()
@@ -29,11 +29,16 @@ const AddForm = ({ persons, setPersons }) => {
     if (personExists) {
       alert(`${newName} is already added to the phonebook`);
     } else {
-      setPersons(persons.concat(phoneObj));
+      // http://001.fly.dev/notes
+      axios.post('http://localhost:3000/notes', phoneObj).then((res) => {
+        console.log(res);
+
+        setPersons(persons.concat(phoneObj));
+      });
     }
 
     setNewName('');
-    setNewNumber('');
+    setNewId('');
     // setNewSearch('');
     // setFilteredResults([]);
   };
@@ -46,7 +51,7 @@ const AddForm = ({ persons, setPersons }) => {
           name: <input value={newName} onChange={handleNameChange} />
         </div>
         <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
+          id: <input value={newId} onChange={handleNumberChange} />
         </div>
         <div>
           <button type='submit'>add</button>
