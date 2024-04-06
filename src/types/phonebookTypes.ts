@@ -3,4 +3,4 @@ interface PersonEntry {
   id: string;
 }
 
-export type { PersonEntry }
+export type { PersonEntry };
