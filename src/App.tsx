@@ -6,14 +6,14 @@ import type { PersonEntry } from './types/phonebookTypes';
 import peopleService from './services/people';
 
 const App = () => {
-  const [persons, setPersons] = useState([]);
+  const [persons, setPersons] = useState<PersonEntry[]>([]);
   const [filteredResults, setFilteredResults] = useState<PersonEntry[]>([]);
 
   useEffect(() => {
     console.log('effect');
     peopleService.getAll().then((res) => {
       console.log('promise fulfilled');
-      setPersons(res.data);
+      setPersons(res);
     });
   }, []);
 
