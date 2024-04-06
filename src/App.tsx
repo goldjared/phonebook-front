@@ -3,7 +3,7 @@ import { Search } from './components/Search';
 import { AddForm } from './components/AddForm';
 import { PersonDisplay } from './components/PersonDisplay';
 import type { PersonEntry } from './types/phonebookTypes';
-import axios from 'axios';
+import peopleService from './services/people';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -11,7 +11,7 @@ const App = () => {
 
   useEffect(() => {
     console.log('effect');
-    axios.get('http://localhost:3000/notes').then((res) => {
+    peopleService.getAll().then((res) => {
       console.log('promise fulfilled');
       setPersons(res.data);
     });
