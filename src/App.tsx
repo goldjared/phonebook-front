@@ -20,7 +20,7 @@ const App = () => {
   console.log('render', persons.length, 'notes');
 
   return (
-    <div>
+    <div className='main'>
       <h2>Phonebook</h2>
       <Search
         persons={persons}
