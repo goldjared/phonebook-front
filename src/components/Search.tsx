@@ -17,8 +17,8 @@ const Search = ({ persons, setFilteredResults }) => {
       : setFilteredResults(filteredData);
   };
   return (
-    <div>
-      search:{' '}
+    <div className='form-input'>
+      search:
       <input value={newSearch} onChange={(e) => searchItems(e.target.value)} />
     </div>
   );

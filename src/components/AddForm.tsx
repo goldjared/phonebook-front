@@ -48,10 +48,10 @@ const AddForm = ({ persons, setPersons }) => {
     <>
       <h2>Add a New</h2>
       <form onSubmit={addPerson}>
-        <div>
+        <div className='form-input'>
           name: <input value={newName} onChange={handleNameChange} />
         </div>
-        <div>
+        <div className='form-input'>
           id: <input value={newId} onChange={handleNumberChange} />
         </div>
         <div>
