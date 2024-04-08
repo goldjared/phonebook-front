@@ -1,11 +1,17 @@
-import axios from 'axios';
 import type { PersonEntry } from '../types/phonebookTypes';
 import { useState } from 'react';
 import peopleService from '../services/people';
 
+const randomVal = (max: number): number => {
+  return Math.floor(Math.random() * max);
+};
+
+const numberGen = (): string =>
+  randomVal(100) + '-' + randomVal(100) + '-' + randomVal(1000000);
+
 const AddForm = ({ persons, setPersons }) => {
   const [newName, setNewName] = useState('');
-  const [newId, setNewId] = useState('');
+  const [newNum, setNewNum] = useState(numberGen());
 
   const handleNameChange = (event) => {
     console.log(event.target.value);
@@ -14,7 +20,7 @@ const AddForm = ({ persons, setPersons }) => {
 
   const handleNumberChange = (event) => {
     console.log(event.target.value);
-    setNewId(event.target.value);
+    setNewNum(event.target.value);
   };
 
   const addPerson = (event) => {
@@ -22,7 +28,7 @@ const AddForm = ({ persons, setPersons }) => {
     console.log('button clicked', event.target);
     const phoneObj: PersonEntry = {
       name: newName,
-      id: newId,
+      number: newNum,
     };
     let personExists: boolean = persons.some(
       (person) => person.name.toLowerCase() === newName.toLowerCase()
@@ -36,7 +42,7 @@ const AddForm = ({ persons, setPersons }) => {
 
         setPersons(persons.concat(phoneObj));
         setNewName('');
-        setNewId('');
+        setNewNum(numberGen());
       });
     }
 
@@ -52,7 +58,7 @@ const AddForm = ({ persons, setPersons }) => {
           name: <input value={newName} onChange={handleNameChange} />
         </div>
         <div className='form-input'>
-          id: <input value={newId} onChange={handleNumberChange} />
+          number: <input value={newNum} onChange={handleNumberChange} />
         </div>
         <div>
           <button type='submit'>add</button>
