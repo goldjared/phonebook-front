@@ -8,7 +8,7 @@ const PersonDisplay = ({ filteredResults, persons, setPersons }) => {
         {filteredResults.length > 0
           ? filteredResults.map((person) => (
               <Number
-                key={person.name}
+                key={person.id}
                 person={person}
                 persons={persons}
                 setPersons={setPersons}
@@ -16,7 +16,7 @@ const PersonDisplay = ({ filteredResults, persons, setPersons }) => {
             ))
           : persons.map((person) => (
               <Number
-                key={person.name}
+                key={person.id}
                 person={person}
                 persons={persons}
                 setPersons={setPersons}
