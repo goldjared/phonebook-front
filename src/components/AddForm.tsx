@@ -39,7 +39,7 @@ const AddForm = ({ persons, setPersons }) => {
       // http://001.fly.dev/notes
       peopleService.create(phoneObj).then((res) => {
         console.log(res);
-
+        phoneObj.id = res.id;
         setPersons(persons.concat(phoneObj));
         setNewName('');
         setNewNum(numberGen());
