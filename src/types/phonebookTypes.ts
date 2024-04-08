@@ -1,6 +1,6 @@
 interface PersonEntry {
   name: string;
-  id: string;
+  number: string;
 }
 
 export type { PersonEntry };
