@@ -32,6 +32,7 @@ const App = () => {
       <PersonDisplay
         filteredResults={filteredResults}
         persons={persons}
+        setPersons={setPersons}
       ></PersonDisplay>
     </>
   );
