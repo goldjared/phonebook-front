@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { PersonEntry } from '../types/phonebookTypes';
 // const baseUrl = 'http://localhost:3000/people';
-const baseUrl = 'http://001.fly.dev/people';
+// const baseUrl = 'http://001.fly.dev/people';
+const baseUrl = '/people';
 
 const getAll = () => {
   const request = axios.get(baseUrl);
