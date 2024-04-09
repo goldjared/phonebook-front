@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import type { SearchProps } from '../types/phonebookTypes';
 
-const Search = ({ persons, setFilteredResults }) => {
+const Search: React.FC<SearchProps> = ({ persons, setFilteredResults }) => {
   const [newSearch, setNewSearch] = useState('');
 
-  const searchItems = (searchValue) => {
+  const searchItems = (searchValue: any) => {
     setNewSearch(searchValue);
     const filteredData = persons.filter((item) => {
       return Object.values(item)

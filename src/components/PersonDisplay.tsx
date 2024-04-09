@@ -1,6 +1,11 @@
 import { Number } from '../components/Number';
+import type { PersonDisplay } from '../types/phonebookTypes';
 
-const PersonDisplay = ({ filteredResults, persons, setPersons }) => {
+const PersonDisplay: React.FC<PersonDisplay> = ({
+  filteredResults,
+  persons,
+  setPersons,
+}) => {
   return (
     <>
       <h2>Numbers</h2>

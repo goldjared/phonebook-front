@@ -1,6 +1,7 @@
 import peopleService from '../services/people';
+import type { NumberProp } from '../types/phonebookTypes';
 
-const Number = ({ person, persons, setPersons }) => {
+const Number: React.FC<NumberProp> = ({ person, persons, setPersons }) => {
   const delPerson = () => {
     console.log(person.name);
     peopleService.remove(person.id).then((res) => {

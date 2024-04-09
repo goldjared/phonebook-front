@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { PersonEntry } from '../types/phonebookTypes';
 // const baseUrl = 'http://localhost:3000/people';
 const baseUrl = 'http://001.fly.dev/people';
 
@@ -7,12 +8,12 @@ const getAll = () => {
   return request.then((response) => response.data);
 };
 
-const create = (newObject) => {
+const create = (newObject: PersonEntry) => {
   const request = axios.post(baseUrl, newObject);
   return request.then((response) => response.data);
 };
 
-const update = (id, newObject) => {
+const update = (id: number, newObject: PersonEntry) => {
   const request = axios.put(`${baseUrl}/${id}`, newObject);
   return request.then((response) => response.data);
 };
