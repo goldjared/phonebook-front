@@ -29,6 +29,7 @@ const AddForm: React.FC<PersonProps> = ({ persons, setPersons }) => {
     const phoneObj: PersonEntry = {
       name: newName,
       number: newNum,
+      id: -1,
     };
     let personExists: boolean = persons.some(
       (person: PersonEntry) =>
