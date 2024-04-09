@@ -1,4 +1,4 @@
-import type { PersonEntry } from '../types/phonebookTypes';
+import type { PersonEntry, PersonProps } from '../types/phonebookTypes';
 import { useState } from 'react';
 import peopleService from '../services/people';
 
@@ -9,21 +9,21 @@ const randomVal = (max: number): number => {
 const numberGen = (): string =>
   randomVal(100) + '-' + randomVal(100) + '-' + randomVal(1000000);
 
-const AddForm = ({ persons, setPersons }) => {
+const AddForm: React.FC<PersonProps> = ({ persons, setPersons }) => {
   const [newName, setNewName] = useState('');
   const [newNum, setNewNum] = useState(numberGen());
 
-  const handleNameChange = (event) => {
+  const handleNameChange = (event: any) => {
     console.log(event.target.value);
     setNewName(event.target.value);
   };
 
-  const handleNumberChange = (event) => {
+  const handleNumberChange = (event: any) => {
     console.log(event.target.value);
     setNewNum(event.target.value);
   };
 
-  const addPerson = (event) => {
+  const addPerson = (event: any) => {
     event.preventDefault();
     console.log('button clicked', event.target);
     const phoneObj: PersonEntry = {
@@ -31,7 +31,8 @@ const AddForm = ({ persons, setPersons }) => {
       number: newNum,
     };
     let personExists: boolean = persons.some(
-      (person) => person.name.toLowerCase() === newName.toLowerCase()
+      (person: PersonEntry) =>
+        person.name.toLowerCase() === newName.toLowerCase()
     );
     if (personExists) {
       alert(`${newName} is already added to the phonebook`);
