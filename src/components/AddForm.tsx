@@ -1,5 +1,5 @@
 import type { PersonEntry, PersonProps } from '../types/phonebookTypes';
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import peopleService from '../services/people';
 
 const randomVal = (max: number): number => {
@@ -29,14 +29,53 @@ const AddForm: React.FC<PersonProps> = ({ persons, setPersons }) => {
     const phoneObj: PersonEntry = {
       name: newName,
       number: newNum,
-      id: -1,
+      id: '',
     };
-    let personExists: boolean = persons.some(
+    let personId: string | undefined = persons.find(
       (person: PersonEntry) =>
         person.name.toLowerCase() === newName.toLowerCase()
-    );
-    if (personExists) {
-      alert(`${newName} is already added to the phonebook`);
+    )?.id;
+
+    if (personId != undefined) {
+      alert(
+        `${newName} is already added to the phonebook, updating number for ${newName}`
+      );
+
+      phoneObj.id = personId;
+      peopleService.update(personId, phoneObj).then((res) => {
+        console.log(res);
+      });
+      console.log(persons + ' this is persons state');
+      // setPersons(
+      //   persons.map((updatedPerson: any) => {
+      //     if (updatedPerson.id === personId) {
+      //       // Create a *new* object with changes
+      //       return { ...persons, number: newNum };
+      //     } else {
+      //       // No changes
+      //       return persons;
+      //     }
+      //   })
+      // );
+      let counter: number = 0;
+      // persons.map((updatedPerson: any) => {
+      //   // Create a *new* object with changes
+      //   console.log(updatedPerson);
+      // });
+      setPersons(
+        persons.map((updatedPerson: any) => {
+          // Create a *new* object with changes
+          if (counter === 2) {
+            console.log('counter is 2');
+            return { ...updatedPerson, name: 'and_test' };
+          }
+          counter++;
+          console.log(counter);
+          return { ...updatedPerson };
+        })
+      );
+      //      setPersons({ ...persons });
+      //setPersons({...persons, phoneObj}));
     } else {
       peopleService.create(phoneObj).then((res) => {
         console.log(res);
