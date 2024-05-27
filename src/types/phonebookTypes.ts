@@ -1,7 +1,7 @@
 interface PersonEntry {
   name: string;
   number: string;
-  id: number;
+  id: string;
 }
 
 interface PersonProps {
