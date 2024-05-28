@@ -31,11 +31,12 @@ const AddForm: React.FC<PersonProps> = ({ persons, setPersons }) => {
       number: newNum,
       id: '',
     };
+    // undefined id if name does not exist
     let personId: string | undefined = persons.find(
       (person: PersonEntry) =>
         person.name.toLowerCase() === newName.toLowerCase()
     )?.id;
-
+    // if the person name exists, we update said person's number
     if (personId != undefined) {
       alert(
         `${newName} is already added to the phonebook, updating number for ${newName}`
@@ -46,45 +47,25 @@ const AddForm: React.FC<PersonProps> = ({ persons, setPersons }) => {
         console.log(res);
       });
       console.log(persons + ' this is persons state');
-      // setPersons(
-      //   persons.map((updatedPerson: any) => {
-      //     if (updatedPerson.id === personId) {
-      //       // Create a *new* object with changes
-      //       return { ...persons, number: newNum };
-      //     } else {
-      //       // No changes
-      //       return persons;
-      //     }
-      //   })
-      // );
-      let counter: number = 0;
-      // persons.map((updatedPerson: any) => {
-      //   // Create a *new* object with changes
-      //   console.log(updatedPerson);
-      // });
+
+      // update state with new number to reflect update
       setPersons(
         persons.map((updatedPerson: any) => {
-          // Create a *new* object with changes
-          if (counter === 2) {
-            console.log('counter is 2');
-            return { ...updatedPerson, name: 'and_test' };
+          if (updatedPerson.id === personId) {
+            return { ...updatedPerson, number: newNum };
           }
-          counter++;
-          console.log(counter);
           return { ...updatedPerson };
         })
       );
-      //      setPersons({ ...persons });
-      //setPersons({...persons, phoneObj}));
     } else {
       peopleService.create(phoneObj).then((res) => {
         console.log(res);
         phoneObj.id = res.id;
         setPersons(persons.concat(phoneObj));
-        setNewName('');
-        setNewNum(numberGen());
       });
     }
+    setNewName('');
+    setNewNum(numberGen());
 
     // setNewSearch('');
     // setFilteredResults([]);
