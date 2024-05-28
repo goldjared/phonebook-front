@@ -1,5 +1,5 @@
 import type { PersonEntry, PersonProps } from '../types/phonebookTypes';
-import { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import peopleService from '../services/people';
 
 const randomVal = (max: number): number => {
@@ -66,9 +66,6 @@ const AddForm: React.FC<PersonProps> = ({ persons, setPersons }) => {
     }
     setNewName('');
     setNewNum(numberGen());
-
-    // setNewSearch('');
-    // setFilteredResults([]);
   };
 
   return (
